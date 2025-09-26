@@ -1,0 +1,1 @@
+This agent takes in a user query that relates to finding NE555 based circuits and related information on the web. The agent then converts this query into a detailed set of requirements for the circuit search.

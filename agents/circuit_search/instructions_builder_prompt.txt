@@ -1,0 +1,5 @@
+
+Used the following prompt to generate the instructions.txt file (this file is used as developer reference and is NOT required as part of the software functionality)
+
+Give me the instructions for an agent called circuit search agent. This agent will read state['requirements_writer_output'] and use it as the detailed functional requirements to execute. The circuit search agent is expected to follow the functional requirements as listed without adding or removing any details and will provide an output in markdown format. Give me a set of instructions I can code in while building this agent. The instructions should be in plain text. Instructions should address the circuit search agent as "you".
+

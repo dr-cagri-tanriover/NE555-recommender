@@ -1,0 +1,5 @@
+
+Used the following prompt to generate the instructions.txt file (this file is used as developer reference and is NOT required as part of the software functionality)
+
+Give me the instructions for an agent called requirements writer agent. The user will provide a brief high level query to find information on a given number of circuit examples based on NE555 timer component to be able to build them and to get them working as circuits on a breadboard. The requirements writer agent is expected to expand that user query into detailed requirements that should be provided in markdown format as the output. Give me a set of instructions I can code in while building this agent. The instructions should be in plain text. Instructions should address the requirements writer agent as "you".
+

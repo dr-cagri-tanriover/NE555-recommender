@@ -5,10 +5,10 @@ from google.adk.agents import LlmAgent
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),"..","..")))
 from utils.file_loader import load_instructions_file
 
-designer_agent = LlmAgent(
-    name = "designer_agent",
+circuit_search_agent = LlmAgent(
+    name = "circuit_search_agent",
     model = "gemini-2.5-flash",
-    instruction=load_instructions_file("agents/designer/instructions.txt"),
-    description=load_instructions_file("agents/designer/description.txt"),
-    output_key="designer_output"
+    instruction=load_instructions_file("agents/circuit_search/instructions.txt"),
+    description=load_instructions_file("agents/circuit_search/description.txt"),
+    output_key="circuit_search_output"
 )

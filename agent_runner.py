@@ -14,7 +14,7 @@ load_dotenv()
 
 # --- B. IMPORTING OUR AGENT ---
 # We are importing the "brain" of our AI agent from our project.
-from agents.root_website_builder.agent import root_agent
+from agents.root_ne555_recommender.agent import root_agent
 
 # --- C. IMPORTING ADK (AGENT DEVELOPMENT KIT) COMPONENTS ---
 # These are special tools from the ADK to run our agent programmatically.
@@ -34,7 +34,7 @@ async def chat_loop():
     Initializes the agent and session, then enters a loop to
     continuously accept user queries and provide agent responses.
     """
-    print("Agent Chat Session Started.")
+    print("NE555 Recommender Agent Chat Session Started.")
     print("Type 'quit', 'exit', or ':q' to end the session.\n")
 
     # --- SETUP (Done Once) ---
@@ -58,7 +58,7 @@ async def chat_loop():
     # This 'while True' loop will run indefinitely until the user decides to quit.
     while True:
         # Prompt the user for their next message.
-        user_query = input("Enter your query: ")
+        user_query = input("Which 555 project(s) do you have in mind today?: ")
 
         # Check if the user wants to exit the chat.
         # .lower() makes the text lowercase so "Quit" or "QUIT" also work.

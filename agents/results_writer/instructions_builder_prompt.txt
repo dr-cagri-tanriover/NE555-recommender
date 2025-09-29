@@ -1,0 +1,5 @@
+
+Used the following prompt to generate the instructions.txt file (this file is used as developer reference and is NOT required as part of the software functionality)
+
+Give me the instructions for an agent called results writer agent. This agent will read state['requirements_writer_output'] as well as state['circuit_search_output'] and use them to generate a working html file that summarizes the search results provided in state['circuit_search_output'] in a human readable and user friendly way. The results writer agent is expected to create a visually clear and easy to understand html document based on the findings provided in state['circuit_search_output'] without making any assumptions or performing additional search. Give me a set of instructions I can code in while building this agent. The instructions should be in plain text. Instructions should address the results writer search agent as "you".
+

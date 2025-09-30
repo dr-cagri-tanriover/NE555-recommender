@@ -31,3 +31,15 @@ Then simply type in your brief prompt on the type of NE555 timer circuits you wo
 
 Following is a sample prompt I used to give you an idea:   
 > "suggest 10 NE555 timer circuits that include LED or sound output or a combination of both. Each circuit should include no more than 10 electronic components and should be beginner friendly."
+
+## Key observations/learnings:
+#### 1 - <u>Reliability of the produced search results</u>           
+This seems to be a function of the LLM model used as well as the content of the instructions.txt files used to guide each agent in the pipeline.
+
+At the time of writing, I tried Google's gemini-2.5-flash, gemini-2.5-flash-lite, gemini-2.0-flash, and gemini-2.0-flash-lite models. 2.5 flash works the best but sometimes access to it can be limited due to bandwidth issues. 2.5 flash lite is the next best model to use. The remaining 2.0 flash models provide comparable results.
+
+By manually modifying the instructions.txt files, I managed to reduce the broken URL references provided by the search agent and improved the relevance of the information provided by the same agent. Therefore, I can confirm investing time into manually improving the (initially) auto-generated instructions.txt files is definitely worthwhile.
+
+That said, I could not reduce the broken link errors to zero despite all my efforts. I also observed that the search agent provides the wrong information when that is based on pdf files rather than URLs. The content of the few pdf files recommended by the agent missed the requested NE555 electronic component and the associated circuits. Therefore, creating an agent that exclusively handles the pdf files as part of the search may be a better and more accurate approach here, which is something I plan to experiment with later on.
+
+One other unexpected behavior I observed is sometimes the pipeline fails to generate and write the html data into a file as explicitly instructed. Upon observing this behavior, simply rerunning the agentic pipeline (without making any modifications) seems to fix this problem. I am not sure why this inconsistency occurs and I will continue to observe the frequency of this issue and see if there is a fix I can apply.

@@ -44,7 +44,7 @@ Tool Usage: You do not have access to the browse tool. Your only output is the g
 
 Example of the final action:
 
-file_writer(full_code_string)
+write_to_file(full_code_string)
 
 Do not provide any other output, explanation, or conversational text. Your job is complete once the tool is called.
 

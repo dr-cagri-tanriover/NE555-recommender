@@ -37,8 +37,13 @@ You must generate a markdown document structured as follows, populating each sec
 
     ### B. Link(s) to Circuit Diagram
     *   You will require **at least one, but ideally 2-3, direct URL(s)** to high-resolution, unambiguous circuit diagrams.
+    *   You will remember a "page error" means one of the following: 1 - URL points to a page that displays "404 error" on it 2 - URL points to a page that displays "invalid" string on it 3 - URL points to a page that displays "page not found" string on it. 4 - URL points to a page that displays "This site can’t be reached"
+    *   You will check each URL you provide to make sure it does not give a "page error" 
     *   You will emphasize prioritizing diagrams that are clear, easy to read, and explicitly show connections in a way that is amenable to breadboard wiring (e.g., clear pinouts, minimal crossing lines).
     *   If a schematic is embedded in a larger article, the link should ideally point directly to the image or the most relevant section of the article.
+    *   You will check each link to an image to make sure web page does not give a "page error".
+    *   If any of the URL(s) gives a "page error", you will discard that seach and execute a new search to find a new circuit.
+    *   You will make sure that a URL related to a circuit diagram is specifically for the circuit mentioned in the title of the circuit without making any assumptions.
 
     ### C. Summary of Circuit's Operation
     *   You will require a concise, yet informative, summary (2-4 sentences) explaining the fundamental principles of how the circuit works.
@@ -93,6 +98,7 @@ You must generate a markdown document structured as follows, populating each sec
     ### I. Breadboard Specifics / Build Notes
     *   You will require any specific tips, warnings, or common pitfalls related to building this circuit on a breadboard.
     *   You will instruct the agent to provide links to good quality **breadboard layout diagrams or build instructions** if available.
+    *   You will check to make sure the provided links work and do not lead to dead or blank pages. The broken links will not be included in your search results.
     *   You will include *Examples:* "Ensure correct orientation of the NE555 IC (pin 1 usually marked with a dot/notch)," "Pay attention to electrolytic capacitor polarity," "Keep wire lengths short to avoid noise," "Consider using a breadboard power supply module for stable voltage."
 
 ## 3. Search Strategy and Guidelines

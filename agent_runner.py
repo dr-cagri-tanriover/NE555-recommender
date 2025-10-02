@@ -2,6 +2,7 @@
 # 'asyncio' is a Python library that helps run multiple tasks at the same time.
 import asyncio
 import json
+import logging
 from typing import Any
 from rich import print as rprint    # Enhanced print function to support colors and formatting
 from rich.syntax import Syntax      # Used to highlight JSON output in the terminal
@@ -125,4 +126,10 @@ def print_json_response(response: Any, title: str) -> None:
 # --- 3. STARTING THE PROGRAM ---
 # This is the entry point that runs our chat loop.
 if __name__ == '__main__':
+
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s - %(levelname)s - %(name)s - %(message)s'
+    )
+
     asyncio.run(chat_loop())

@@ -127,9 +127,11 @@ def print_json_response(response: Any, title: str) -> None:
 # This is the entry point that runs our chat loop.
 if __name__ == '__main__':
 
+    """
     logging.basicConfig(
         level=logging.DEBUG,
         format='%(asctime)s - %(levelname)s - %(name)s - %(message)s'
     )
-
+    """
+    
     asyncio.run(chat_loop())

@@ -18,15 +18,14 @@ You must apply the "Ambiguity Resolution & Common Sense Gaps" instructions when 
 Your Tool Usage:
 You are equipped with the Google search tool. You must use this tool to access web pages, PDFs, and other online resources.
 
-Your search process should be iterative: perform a search, browse relevant links, extract information, and potentially refine your search based on initial findings if needed to meet the requirements.
+Your search process should be iterative: perform a search, check the validity of the relevant links using the url_validator tool, browse relevant links validated by the url_validator tool, extract information, and potentially refine your search based on initial findings if needed to meet the requirements.
 
-You will remember a "page error" means one of the following: 1 - URL points to a page that displays "404 error" on it 2 - URL points to a page that displays "invalid" string on it 3 - URL points to a page that displays "page not found" string on it. 4 - URL points to a page that displays "This site can’t be reached"
+You will make sure every relevant link you discover in your search will be provided to the url_validator tool as a string to check its validity first. You will only browse the links for which the url_validator tool returns True.
 
-You will check each URL you provide to make sure it does not give a "page error" 
+You will check the validity of each relevant link as follows:
+url_validator(your_url_candidate_as_a_string)
 
-You will check each link to an image to make sure web page does not give a "page error".
-
-If any of the URL(s) gives a "page error", you will discard that seach and execute a new search to find a new circuit.
+If any of the your relevant URL(s) you pass to the url_validator tool as argument returns False, you will discard that relevant link and search for a new relevant URL. You may also look for a new circuit and discard the one with a URL invalidated by the url_validator tool.
 
 When using the Google search tool, enclose your calls in print() statements to observe their output.
 
@@ -48,11 +47,13 @@ No Deviation: If state['requirements_writer_output'] asks for "N" circuits, you 
 
 Direct Execution: Your responses will be the markdown output of the gathered information, adhering to the specified format. You should not engage in conversational dialogue or explain your process beyond what is necessary to present the findings.
 
+Valid URL: You will not include any circuits in your response that does not have at least one valid URL as reference. If you cannot find a valid URL for a circuit, you will not include any information on that circuit in your response.
+
 Your Workflow Summary:
 Step 1: Read and fully comprehend state['requirements_writer_output'].
 Step 2: Formulate search queries based on the "Search Strategy and Guidelines" in your requirements.
 Step 3: Use the Google search tool to execute searches and gather raw information.
-Step 4: Check and confirm that each URL you use in Google search tool points to a page with relevant technical content. 
+Step 4: Check and confirm that each URL you use in Google search tool is validated using the url_valid tool before continuing your search. 
 Step 5: Extract the "Target Information per Circuit" for each relevant NE555 circuit found, meticulously following all sub-section requirements, including breadboard specifics and cost estimations.
 Step 6: Apply "Ambiguity Resolution & Common Sense Gaps" guidelines where necessary.
 Step 7: Format all extracted information precisely according to the "Output Format" section in your requirements, ensuring proper markdown and citations.

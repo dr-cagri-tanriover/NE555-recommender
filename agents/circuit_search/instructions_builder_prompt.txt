@@ -1,5 +1,21 @@
 
 Used the following prompt to generate the instructions.txt file (this file is used as developer reference and is NOT required as part of the software functionality)
 
-Give me the instructions for an agent called circuit search agent. This agent will read state['requirements_writer_output'] and use it as the detailed functional requirements to execute. The circuit search agent is expected to follow the functional requirements as listed without adding or removing any details and will provide an output in markdown format. Give me a set of instructions I can code in while building this agent. The instructions should be in plain text. Instructions should address the circuit search agent as "you".
+Give me the instructions for an agent called circuit search agent. This agent will read state['requirements_writer_output'] and use it as the detailed functional requirements to execute.
+
+The circuit search agent is expected to follow the functional requirements as listed without adding or removing any details and will provide an output in markdown format. 
+
+The circuit search agent will identify the number of circuits (N) to search for as described in state['requirements_writer_output']. It will then perform a search using the UrlSeeker tool
+to identify 2N URLs of relevant circuits. The UrlSeeker tool will deliver the relevant URLs it finds as its output {"candidate_urls": ["url1", "url2", ...]}
+
+Once 2N URLs of relevant circuits are listed as the output of UrlSeeker, the circuit search agent will input those URLs to a second tool called ValidationTool. The ValidationTool will create
+an output {"validated_urls": ["valid_url1", "valid_url2", ...]} that will include a subset of the original 2N URLs.
+
+The circuit search agent will use the SearchTool to look up each URL in the output of the ValidationTool to complete the remaining tasks described in the detailed functional requirements listed in state['requirements_writer_output'].
+
+The circuit search agent will only use the SearchTool for accessing links on the web and no other tools for browsing.
+
+The circuit search agent will only use the URLs listed in the output of the ValidationTool and will ignore any other URLs while using the SearchTool.
+
+Give me a set of instructions I can code in while building this agent. The instructions should be in plain text. Instructions should address the circuit search agent as "you".
 

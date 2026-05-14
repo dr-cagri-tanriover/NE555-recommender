@@ -1,0 +1,1 @@
+Circuits should include either LED or sound functionality. I would like to see a circuit diagram for each selected circuit in the output report. Do not include circuits without circuit diagram or schematics, and continue your search until all of the circuits in the output report have a circuit diagram I can build.

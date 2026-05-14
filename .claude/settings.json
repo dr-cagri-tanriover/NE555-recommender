@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv sync)",
+      "Bash(uv --version)",
+      "Bash(uv pip list *)",
+      "Bash(ollama list)"
+    ],
+    "deny": []
+  }
+}

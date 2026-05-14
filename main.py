@@ -71,8 +71,11 @@ def main(prompt: tuple[str, ...], prompt_file: str | None, count: int, output: s
         click.echo(f"Error: {exc}", err=True)
         sys.exit(1)
 
+    model_name = (
+        settings.gemini_model if settings.llm_provider == "gemini" else settings.ollama_model
+    )
     click.echo(f"Generating PDF with {len(circuits)} circuit(s)…", err=True)
-    generate_pdf(circuits, user_prompt, output_path, count)
+    generate_pdf(circuits, user_prompt, output_path, count, model_name)
     click.echo(f"Report written to: {output_path}")
 
 

@@ -132,6 +132,7 @@ def _build_cover(
     user_prompt: str,
     circuits: list[Circuit],
     count_requested: int,
+    model_name: str = "",
 ) -> list[Any]:
     today = datetime.date.today().isoformat()
     flowables: list[Any] = [
@@ -149,8 +150,13 @@ def _build_cover(
         Spacer(1, 0.5 * cm),
         HRFlowable(width="100%", thickness=1, color=colors.steelblue),
         Spacer(1, 0.3 * cm),
-        Paragraph("<b>Contents</b>", styles["subsection"]),
     ]
+
+    if model_name:
+        flowables.append(Paragraph(f"<b>LLM model:</b> {model_name}", styles["subtitle"]))
+        flowables.append(Spacer(1, 0.3 * cm))
+
+    flowables.append(Paragraph("<b>Contents</b>", styles["subsection"]))
 
     for i, circuit in enumerate(circuits):
         anchor = f"circuit_{i}"
@@ -287,6 +293,7 @@ def generate_pdf(
     user_prompt: str,
     output_path: str,
     count_requested: int,
+    model_name: str = "",
 ) -> None:
     styles = _make_styles()
     doc = SimpleDocTemplate(
@@ -301,7 +308,7 @@ def generate_pdf(
     )
 
     flowables: list[Any] = []
-    flowables.extend(_build_cover(styles, user_prompt, circuits, count_requested))
+    flowables.extend(_build_cover(styles, user_prompt, circuits, count_requested, model_name))
 
     for i, circuit in enumerate(circuits):
         flowables.extend(_build_circuit_section(i, circuit, styles))

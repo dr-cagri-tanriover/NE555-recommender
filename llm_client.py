@@ -12,6 +12,13 @@ import time
 
 from config import settings
 
+_total_llm_seconds: float = 0.0
+
+
+def get_total_llm_time() -> float:
+    """Return cumulative seconds spent waiting for LLM responses (excludes rate-limit sleeps)."""
+    return _total_llm_seconds
+
 
 def generate(system: str, user_msg: str, max_tokens: int = 2048) -> str:
     """Return LLM text completion, routing to Gemini or Ollama per settings."""
@@ -26,6 +33,7 @@ def generate(system: str, user_msg: str, max_tokens: int = 2048) -> str:
 # ---------------------------------------------------------------------------
 
 def _generate_gemini(system: str, user_msg: str, max_tokens: int) -> str:
+    global _total_llm_seconds
     from google import genai
     from google.genai import errors as genai_errors
     from google.genai import types
@@ -45,13 +53,19 @@ def _generate_gemini(system: str, user_msg: str, max_tokens: int) -> str:
         return response.text
 
     try:
-        return _invoke()
+        t0 = time.perf_counter()
+        result = _invoke()
+        _total_llm_seconds += time.perf_counter() - t0
+        return result
     except genai_errors.ClientError as exc:
         if exc.code != 429:
             raise
         print("[llm_client] Gemini rate limited — sleeping 60s", file=sys.stderr)
         time.sleep(60)
-        return _invoke()  # raises naturally on second failure
+        t0 = time.perf_counter()
+        result = _invoke()  # raises naturally on second failure
+        _total_llm_seconds += time.perf_counter() - t0
+        return result
 
 
 # ---------------------------------------------------------------------------
@@ -59,6 +73,7 @@ def _generate_gemini(system: str, user_msg: str, max_tokens: int) -> str:
 # ---------------------------------------------------------------------------
 
 def _generate_ollama(system: str, user_msg: str, max_tokens: int) -> str:
+    global _total_llm_seconds
     try:
         import ollama  # type: ignore[import]
     except ImportError as exc:
@@ -72,12 +87,14 @@ def _generate_ollama(system: str, user_msg: str, max_tokens: int) -> str:
         {"role": "user", "content": user_msg},
     ]
     try:
+        t0 = time.perf_counter()
         response = client.chat(
             model=settings.ollama_model,
             messages=messages,
             think=False,  # disable extended-thinking / <think> mode (e.g. qwen3)
             options={"num_predict": max_tokens},
         )
+        _total_llm_seconds += time.perf_counter() - t0
         content = response.message.content
         if not content or not content.strip():
             raise RuntimeError(

@@ -5,6 +5,7 @@ import sys
 import click
 
 from config import settings
+from llm_client import get_total_llm_time
 from pdf_generator import generate_pdf
 from recommender import RecommenderError, get_recommendations
 
@@ -74,8 +75,10 @@ def main(prompt: tuple[str, ...], prompt_file: str | None, count: int, output: s
     model_name = (
         settings.gemini_model if settings.llm_provider == "gemini" else settings.ollama_model
     )
+    llm_time_min = get_total_llm_time() / 60
+    click.echo(f"Total LLM time: {llm_time_min:.2f} min")
     click.echo(f"Generating PDF with {len(circuits)} circuit(s)…", err=True)
-    generate_pdf(circuits, user_prompt, output_path, count, model_name)
+    generate_pdf(circuits, user_prompt, output_path, count, model_name, llm_time_min)
     click.echo(f"Report written to: {output_path}")
 
 

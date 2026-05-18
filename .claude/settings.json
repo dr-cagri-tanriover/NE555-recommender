@@ -6,6 +6,8 @@
       "Bash(uv pip list *)",
       "Bash(ollama list)"
     ],
-    "deny": []
+    "deny": [
+		"Read(./.env)"
+	]
   }
 }

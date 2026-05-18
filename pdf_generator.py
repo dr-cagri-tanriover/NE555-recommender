@@ -133,6 +133,7 @@ def _build_cover(
     circuits: list[Circuit],
     count_requested: int,
     model_name: str = "",
+    llm_time_minutes: float = 0.0,
 ) -> list[Any]:
     today = datetime.date.today().isoformat()
     flowables: list[Any] = [
@@ -154,6 +155,10 @@ def _build_cover(
 
     if model_name:
         flowables.append(Paragraph(f"<b>LLM model:</b> {model_name}", styles["subtitle"]))
+        if llm_time_minutes > 0:
+            flowables.append(
+                Paragraph(f"<b>Total LLM time:</b> {llm_time_minutes:.2f} min", styles["subtitle"])
+            )
         flowables.append(Spacer(1, 0.3 * cm))
 
     flowables.append(Paragraph("<b>Contents</b>", styles["subsection"]))
@@ -294,6 +299,7 @@ def generate_pdf(
     output_path: str,
     count_requested: int,
     model_name: str = "",
+    llm_time_minutes: float = 0.0,
 ) -> None:
     styles = _make_styles()
     doc = SimpleDocTemplate(
@@ -308,7 +314,7 @@ def generate_pdf(
     )
 
     flowables: list[Any] = []
-    flowables.extend(_build_cover(styles, user_prompt, circuits, count_requested, model_name))
+    flowables.extend(_build_cover(styles, user_prompt, circuits, count_requested, model_name, llm_time_minutes))
 
     for i, circuit in enumerate(circuits):
         flowables.extend(_build_circuit_section(i, circuit, styles))
